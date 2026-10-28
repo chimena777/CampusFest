@@ -1,0 +1,51 @@
+<mxGraphModel dx="1133" dy="992" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1220" pageHeight="295" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="l2" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" value="">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="360" y="130" as="sourcePoint" />
+        <mxPoint x="460" y="130" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="t3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;spacing=2;fontStyle=1;" value="1" vertex="1">
+      <mxGeometry height="18" width="44" x="363" y="108" as="geometry" />
+    </mxCell>
+    <mxCell id="t4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=11;spacing=2;fontStyle=1;" value="0..*" vertex="1">
+      <mxGeometry height="18" width="44" x="413" y="108" as="geometry" />
+    </mxCell>
+    <mxCell id="l5" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" value="">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="860" y="130" as="sourcePoint" />
+        <mxPoint x="760" y="130" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="t6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=11;spacing=2;fontStyle=1;" value="1" vertex="1">
+      <mxGeometry height="18" width="44" x="813" y="108" as="geometry" />
+    </mxCell>
+    <mxCell id="t7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;spacing=2;fontStyle=1;" value="0..*" vertex="1">
+      <mxGeometry height="18" width="44" x="763" y="108" as="geometry" />
+    </mxCell>
+    <mxCell id="k8" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;strokeWidth=1.8;dashed=1;" value="&lt;b&gt;Evento&lt;/b&gt;" vertex="1">
+      <mxGeometry height="175" width="300" x="60" y="60" as="geometry" />
+    </mxCell>
+    <mxCell id="m9" parent="k8" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="- idEvento: String&lt;br&gt;- nombre: String&lt;br&gt;- tipo: String&lt;br&gt;- descripcion: String&lt;br&gt;- fechaHora: DateTime&lt;br&gt;- lugar: String&lt;br&gt;- aforo: int&lt;br&gt;- cuposBloqueados: int&lt;br&gt;- fechaHoraUltimaModificacion: DateTime" vertex="1">
+      <mxGeometry height="143" width="300" y="32" as="geometry" />
+    </mxCell>
+    <mxCell id="k10" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;strokeWidth=1.8;" value="&lt;b&gt;Reserva&lt;/b&gt;" vertex="1">
+      <mxGeometry height="153" width="300" x="460" y="60" as="geometry" />
+    </mxCell>
+    <mxCell id="m11" parent="k10" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="- codigoReserva: String&lt;br&gt;- estado: Estado&lt;br&gt;     {Pendiente, Confirmada, Cancelada, Vencida}&lt;br&gt;- fechaHoraCreacion: DateTime&lt;br&gt;- fechaHoraVencimiento: DateTime&lt;br&gt;- codigoQR: String" vertex="1">
+      <mxGeometry height="98" width="300" y="32" as="geometry" />
+    </mxCell>
+    <mxCell id="m12" parent="k10" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="+ cancelar(): void" vertex="1">
+      <mxGeometry height="23" width="300" y="130" as="geometry" />
+    </mxCell>
+    <mxCell id="k13" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;strokeWidth=1.8;dashed=1;" value="&lt;b&gt;Estudiante&lt;/b&gt;" vertex="1">
+      <mxGeometry height="85" width="300" x="860" y="60" as="geometry" />
+    </mxCell>
+    <mxCell id="m14" parent="k13" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="- codigoEstudiante: String&lt;br&gt;- nombre: String&lt;br&gt;- correo: String" vertex="1">
+      <mxGeometry height="53" width="300" y="32" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
