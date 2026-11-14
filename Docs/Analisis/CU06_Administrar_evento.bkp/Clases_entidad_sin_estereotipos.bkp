@@ -1,0 +1,15 @@
+<mxGraphModel dx="680" dy="595" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="420" pageHeight="333" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="k2" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;strokeWidth=1.8;" value="&lt;b&gt;Evento&lt;/b&gt;" vertex="1">
+      <mxGeometry height="213" width="300" x="60" y="60" as="geometry" />
+    </mxCell>
+    <mxCell id="m3" parent="k2" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="- idEvento: String&lt;br&gt;- nombre: String&lt;br&gt;- tipo: String&lt;br&gt;- descripcion: String&lt;br&gt;- fechaHora: DateTime&lt;br&gt;- lugar: String&lt;br&gt;- aforo: int&lt;br&gt;- cuposBloqueados: int&lt;br&gt;- fechaHoraUltimaModificacion: DateTime" vertex="1">
+      <mxGeometry height="143" width="300" y="32" as="geometry" />
+    </mxCell>
+    <mxCell id="m4" parent="k2" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="+ actualizarDescripcion(texto): void&lt;br&gt;+ registrarModificacion(): void" vertex="1">
+      <mxGeometry height="38" width="300" y="175" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

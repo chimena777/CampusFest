@@ -1,0 +1,36 @@
+<mxGraphModel dx="739" dy="647" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="820" pageHeight="273" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="l2" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" value="">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="360" y="130" as="sourcePoint" />
+        <mxPoint x="460" y="130" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="t3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;spacing=2;fontStyle=1;" value="1" vertex="1">
+      <mxGeometry height="18" width="44" x="363" y="108" as="geometry" />
+    </mxCell>
+    <mxCell id="t4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=11;spacing=2;fontStyle=1;" value="0..1" vertex="1">
+      <mxGeometry height="18" width="44" x="413" y="108" as="geometry" />
+    </mxCell>
+    <mxCell id="k5" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;strokeWidth=1.8;" value="&lt;b&gt;Reserva&lt;/b&gt;" vertex="1">
+      <mxGeometry height="153" width="300" x="60" y="60" as="geometry" />
+    </mxCell>
+    <mxCell id="m6" parent="k5" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="- codigoReserva: String&lt;br&gt;- estado: Estado&lt;br&gt;     {Pendiente, Confirmada, Cancelada, Vencida}&lt;br&gt;- fechaHoraCreacion: DateTime&lt;br&gt;- fechaHoraVencimiento: DateTime&lt;br&gt;- codigoQR: String" vertex="1">
+      <mxGeometry height="98" width="300" y="32" as="geometry" />
+    </mxCell>
+    <mxCell id="m7" parent="k5" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="+ validarQR(codigoQR): boolean" vertex="1">
+      <mxGeometry height="23" width="300" y="130" as="geometry" />
+    </mxCell>
+    <mxCell id="k8" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=32;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;strokeWidth=1.8;" value="&lt;b&gt;Asistencia&lt;/b&gt;" vertex="1">
+      <mxGeometry height="108" width="300" x="460" y="60" as="geometry" />
+    </mxCell>
+    <mxCell id="m9" parent="k8" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="- idAsistencia: String&lt;br&gt;- fechaHoraIngreso: DateTime" vertex="1">
+      <mxGeometry height="38" width="300" y="32" as="geometry" />
+    </mxCell>
+    <mxCell id="m10" parent="k8" style="text;strokeColor=#6c8ebf;fillColor=#ffffff;align=left;verticalAlign=top;spacingLeft=6;spacingRight=4;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=0;" value="+ registrar(codReserva): Asistencia&lt;br&gt;+ existeIngreso(codReserva): boolean" vertex="1">
+      <mxGeometry height="38" width="300" y="70" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
