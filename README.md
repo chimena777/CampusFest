@@ -49,13 +49,9 @@ código de otro evento, reserva no confirmada e ingreso repetido (CU4).
 
 **Herramientas y para qué se usaron.** Se usó Claude (Anthropic) para repartir el trabajo entre los cuatro integrantes,
 generar el primer borrador de las clases y de las pantallas, y revisar el cumplimiento de las guías. Clases en las que
-intervino: `Reserva`, `Evento`, `Asistencia`, `EstadoReserva`, los cuatro casos de uso, `EventoExistente`,
+intervino: `Reserva`, `Evento`, `Asistencia`, `EstadoReserva`, los cuatro casos de uso, `BuscadorDeEventos`,
 `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `schema.sql`, `ConfiguracionH2`, `DatosIniciales`, los cuatro
 controladores, los FXML, el CSS, `App`, `Launcher` y este README. Cada integrante revisó, entendió y probó su parte
 antes de integrarla. Las pruebas entregadas por los docentes no se modificaron.
 
-**Propuestas de la IA que había que corregir.** Al revisar el borrador de `EditarEvento` se detectó que cambiar primero
-los datos y después el aforo dejaba el evento a medias en memoria cuando el aforo se rechazaba, aunque no se guardara.
-Se corrigió validando y cambiando el aforo primero y restaurando el aforo anterior si los datos no son válidos
-(commit de la corrección en la rama de Looana Marinella Leon Guevara). Cuando el equipo encuentre otra propuesta de la IA que viole el
-diseño, por ejemplo una regla del negocio dentro de un controlador, debe anotarla aquí con el commit que la corrigió.
+**Propuestas de la IA que había que corregir.** Durante la revisión de `EditarEvento` se identificó el riesgo de modificar parcialmente el evento cuando alguno de los datos o el aforo no fueran válidos. La implementación final valida primero que el nombre, la fecha y el lugar sean correctos; después modifica el aforo mediante `Evento.cambiarAforo()` y actualiza los demás datos. El repositorio solo guarda el evento cuando todas las operaciones terminan correctamente.
