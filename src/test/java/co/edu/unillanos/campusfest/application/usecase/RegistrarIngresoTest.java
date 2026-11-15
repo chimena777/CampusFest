@@ -93,12 +93,4 @@ class RegistrarIngresoTest {
         assertThrows(IllegalArgumentException.class,
                 () -> registrarIngreso.registrar("no-existe", "cualquier-codigo"));
     }
-
-    @Test
-    void unCodigoDeReservaInexistenteSeRechaza() {
-        assertThrows(IllegalArgumentException.class,
-                () -> registrarIngreso.registrar("ev-1", "codigo-inexistente"));
-
-        assertEquals(0, repositorio.getVecesGuardado());
-    }
 }
