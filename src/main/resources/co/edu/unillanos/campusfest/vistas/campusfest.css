@@ -1,0 +1,41 @@
+/* Estilos de CampusFest.*/
+
+.root {
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+    -fx-background-color: #f5f7fa;
+}
+
+.pantalla {
+    -fx-background-color: #ffffff;
+}
+
+.titulo {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f3a5f;
+}
+
+.detalle {
+    -fx-text-fill: #555555;
+}
+
+.mensaje {
+    -fx-font-weight: bold;
+    -fx-text-fill: #0b5394;
+    -fx-padding: 8 0 0 0;
+}
+
+.button {
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.principal {
+    -fx-background-color: #1f6feb;
+    -fx-text-fill: #ffffff;
+}
+
+.text-field {
+    -fx-pref-width: 260px;
+}

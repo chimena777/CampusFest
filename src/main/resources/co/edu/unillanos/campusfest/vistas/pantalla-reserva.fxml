@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- CU2 · Reservar y confirmar una entrada. App asigna el controlador con setController. -->
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="pantalla" spacing="12">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label text="Reservar entrada" styleClass="titulo"/>
+    <Label text="La reserva queda pendiente y debe confirmarse antes de 10 minutos."/>
+    <GridPane hgap="8" vgap="8">
+        <Label text="Evento:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="campoEventoId" promptText="Id del evento"
+                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Estudiante:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="campoEstudianteId" promptText="Código del estudiante"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Código de la reserva:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="campoCodigo" promptText="Se llena al solicitar" prefColumnCount="28"
+                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+    <HBox spacing="8">
+        <Button text="Solicitar reserva" onAction="#alSolicitar"/>
+        <Button text="Confirmar reserva" styleClass="principal" onAction="#alConfirmar"/>
+    </HBox>
+    <Label fx:id="etiquetaMensaje" styleClass="mensaje" wrapText="true"/>
+</VBox>
