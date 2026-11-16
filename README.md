@@ -6,23 +6,23 @@ Aplicación JavaFX para consultar cupos, reservar y confirmar entradas, editar e
 
 | Integrante | Parte desarrollada |
 | --- | --- |
-| Yurley Ximena Lozano | Dominio y reglas del negocio: `Evento`, `Reserva`, `EstadoReserva`, `Asistencia`, `pom.xml` |
-| Looana Marinella Leon Guevara | Casos de uso y puertos: `RepositorioEventos`, `Reloj` y los cuatro casos de uso |
-| Laura Geraldine Beltran Cediel | Interfaz JavaFX e integración: controladores, FXML, CSS, `App`, `Launcher` y diagramas UML |
-| Derlys Xiomara Leal Castillo | Persistencia e infraestructura: `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `RelojDelSistema`, `schema.sql`, `ConfiguracionH2`, `DatosIniciales` |
+| Yurley Ximena Lozano | Dominio y reglas del negocio: `Evento`, `Reserva`, `EstadoReserva`, `Asistencia` |
+| Looana Marinella Leon Guevara | Casos de uso y puertos: `RepositorioEventos`, `Reloj`, los cuatro casos de uso y `BuscadorDeEventos` |
+| Laura Geraldine Beltran Cediel | Interfaz JavaFX e integración: controladores, FXML, CSS, `App`, `Launcher` y diagramas de diseño (`Docs/Diseno`) |
+| Derlys Xiomara Leal Castillo | Persistencia e infraestructura: `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `RelojDelSistema`, `schema.sql` y `pom.xml` |
 
 ## Cómo ejecutar
 
 Requisitos: Java 21 y Maven 3.9 o superior.
 
 ```
-mvn test          # compila y ejecuta las pruebas
+mvn test          # compila y ejecuta las 90 pruebas
 mvn javafx:run    # abre la aplicación
 ```
 
-La base H2 se crea sola en `datos/campusfest` la primera vez, con un evento de ejemplo llamado `ev-1`.
-Para probar: en la pestaña **Reservar entrada** solicite una reserva para `ev-1`, confírmela, copie el código
-y péguelo en **Registrar ingreso**.
+La base H2 se guarda en el archivo `campusfest-db.mv.db`, en la carpeta desde la que se ejecuta la aplicación, y se crea sola la primera vez con dos eventos de ejemplo: `ev-1` (Concierto de bienvenida, aforo 120, 5 cupos bloqueados) y `ev-2` (Feria de emprendimiento, aforo 50).
+
+Para probar: en la pestaña **CU2 · Reservar entrada** solicite una reserva para `ev-1`, confírmela antes de 10 minutos, copie el código y péguelo en **CU4 · Registrar ingreso**.
 
 ## Arquitectura
 
@@ -31,7 +31,9 @@ y péguelo en **Registrar ingreso**.
 | Entidades | `co.edu.unillanos.campusfest.domain` | `Evento`, `Reserva`, `EstadoReserva`, `Asistencia` |
 | Casos de uso | `...application.usecase` y `...application.port` | `ConsultarCupos`, `ReservarEntrada`, `EditarEvento`, `RegistrarIngreso`; puertos `RepositorioEventos` y `Reloj` |
 | Adaptadores | `...infrastructure.persistence`, `.ui`, `.reloj` | `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `RelojDelSistema`, cuatro controladores |
-| Frameworks y drivers | `co.edu.unillanos.campusfest` | `App`, `Launcher`, `ConfiguracionH2`, `DatosIniciales`, FXML, CSS y `db/schema.sql` |
+| Frameworks y drivers | `co.edu.unillanos.campusfest` | `App`, `Launcher`, FXML, CSS y `db/schema.sql` |
+
+`App` es la única clase que crea las implementaciones de los puertos. Pasar de `RepositorioEventosEnMemoria` a `RepositorioEventosH2` solo cambió `App.java` (commits `c5e1cca` y `510ce74`).
 
 ## Casos de uso implementados
 
@@ -42,16 +44,18 @@ y péguelo en **Registrar ingreso**.
 | CU3 Editar evento | `EditarEvento` | `obtener`, `editar` | `pantalla-evento.fxml` |
 | CU4 Registrar el ingreso con QR | `RegistrarIngreso` | `registrar` | `pantalla-ingreso.fxml` |
 
-Flujos alternativos cubiertos: sin cupos y reserva vencida (CU2); aforo menor que los cupos ocupados (CU3);
-código de otro evento, reserva no confirmada e ingreso repetido (CU4).
+Flujos alternativos cubiertos: sin cupos y reserva vencida (CU2); aforo menor que los cupos ocupados (CU3); código de otro evento, reserva no confirmada e ingreso repetido (CU4).
+
+## Diagramas
+
+Los diagramas de diseño actualizados (clases por anillo, secuencias de CU1 a CU4 y estados de `Reserva` con la regla de 10 minutos) están en `Docs/Diseno`, con una tabla de equivalencias con los diagramas de análisis originales. Los diagramas de análisis originales se conservan en `Docs/` como evidencia del trabajo previo.
 
 ## Declaración de uso de IA
 
-**Herramientas y para qué se usaron.** Se usó Claude (Anthropic) para repartir el trabajo entre los cuatro integrantes,
-generar el primer borrador de las clases y de las pantallas, y revisar el cumplimiento de las guías. Clases en las que
-intervino: `Reserva`, `Evento`, `Asistencia`, `EstadoReserva`, los cuatro casos de uso, `BuscadorDeEventos`,
-`RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `schema.sql`, `ConfiguracionH2`, `DatosIniciales`, los cuatro
-controladores, los FXML, el CSS, `App`, `Launcher` y este README. Cada integrante revisó, entendió y probó su parte
-antes de integrarla. Las pruebas entregadas por los docentes no se modificaron.
+**Herramientas y para qué se usaron.** Se usó Claude (Anthropic) para repartir el trabajo entre los cuatro integrantes, generar el primer borrador de las clases y de las pantallas, y revisar el cumplimiento de las guías. Clases en las que intervino: `Reserva`, `Evento`, `Asistencia`, `EstadoReserva`, los cuatro casos de uso, `BuscadorDeEventos`, `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `schema.sql`, los cuatro controladores, los FXML, el CSS, `App`, `Launcher`, los diagramas de `Docs/Diseno` y este README. Cada integrante revisó, entendió y probó su parte antes de integrarla. Las pruebas entregadas por los docentes no se modificaron.
 
-**Propuestas de la IA que había que corregir.** Durante la revisión de `EditarEvento` se identificó el riesgo de modificar parcialmente el evento cuando alguno de los datos o el aforo no fueran válidos. La implementación final valida primero que el nombre, la fecha y el lugar sean correctos; después modifica el aforo mediante `Evento.cambiarAforo()` y actualiza los demás datos. El repositorio solo guarda el evento cuando todas las operaciones terminan correctamente.
+**Propuestas de la IA que había que corregir.**
+
+1. *Regla del negocio en un controlador.* El primer borrador de `PantallaEventoController` mostraba los cupos bloqueados leyéndolos de la entidad (`evento.getBloqueados()`) y armando el texto en el controlador. La prueba `PantallasTest.losControladoresNoTienenReglasDelNegocio` lo rechazó. Se corrigió quitando esa etiqueta del controlador y del FXML (commit `9992ab1`), de modo que el controlador solo lee los campos, llama a `EditarEvento` y muestra el resultado.
+2. *Edición parcial del evento.* Durante la revisión de `EditarEvento` se identificó el riesgo de modificar parcialmente el evento cuando alguno de los datos o el aforo no fueran válidos. La implementación valida antes de modificar y el repositorio solo guarda cuando todas las operaciones terminan bien.
+3. *Pruebas fuera de su carpeta.* Una versión de la rama del dominio dejó `EventoTest` y `ReservaTest` en `src/main/java`, donde `mvn test` no las compila. Se movieron a `src/test/java` (commit `a94ab89`).
