@@ -176,4 +176,55 @@ class ReservaTest {
                 () -> reserva.registrarIngreso(AHORA.plusHours(3)));
         assertEquals(primerIngreso, reserva.getAsistencia().getHora());
     }
+
+    @Test
+void verificarEstadoDespuesDelVencimiento() {
+
+    Reserva reserva = Reserva.pendiente("est-1", AHORA);
+
+    LocalDateTime despues = AHORA.plusMinutes(11);
+
+    assertFalse(reserva.ocupaCupo(despues));
+
+    assertEquals(
+        EstadoReserva.PENDIENTE,
+        reserva.getEstado()
+    );
+}
+
+@Test
+void unaReservaDebeCambiarAVencidaAlCumplirDiezMinutos() {
+
+    Reserva reserva = Reserva.pendiente("est-1", AHORA);
+
+    LocalDateTime despues = AHORA.plusMinutes(10);
+
+    boolean cambio = reserva.actualizarVencimiento(despues);
+
+    assertTrue(cambio);
+
+    assertEquals(
+        EstadoReserva.VENCIDA,
+        reserva.getEstado()
+    );
+
+    assertFalse(reserva.ocupaCupo(despues));
+}
+@Test
+void unaReservaConfirmadaNoDebeVencer() {
+
+    Reserva reserva = Reserva.pendiente("est-1", AHORA);
+
+    reserva.confirmar(AHORA.plusMinutes(5));
+
+    boolean cambio =
+        reserva.actualizarVencimiento(AHORA.plusMinutes(20));
+
+    assertFalse(cambio);
+
+    assertEquals(
+        EstadoReserva.CONFIRMADA,
+        reserva.getEstado()
+    );
+}
 }

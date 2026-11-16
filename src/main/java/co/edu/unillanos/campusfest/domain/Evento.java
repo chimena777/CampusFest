@@ -109,6 +109,20 @@ public class Evento {
         return ocupados;
     }
 
+        public boolean actualizarReservasVencidas(
+        LocalDateTime ahora) {
+
+    boolean huboCambios = false;
+
+    for (Reserva reserva : reservas) {
+        if (reserva.actualizarVencimiento(ahora)) {
+            huboCambios = true;
+        }
+    }
+
+    return huboCambios;
+}
+
     private static void validarDatos(String nombre, LocalDateTime fecha, String lugar) {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del evento es obligatorio.");
@@ -120,6 +134,7 @@ public class Evento {
             throw new IllegalArgumentException("El lugar del evento es obligatorio.");
         }
     }
+
 
     public String getId() {
         return id;

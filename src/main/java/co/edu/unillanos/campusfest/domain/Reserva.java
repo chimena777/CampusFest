@@ -64,6 +64,22 @@ public class Reserva {
         return estado == EstadoReserva.PENDIENTE && !vencio(ahora);
     }
 
+    public boolean actualizarVencimiento(LocalDateTime ahora) {
+
+    if (ahora == null) {
+        throw new IllegalArgumentException(
+            "La fecha actual no puede ser nula."
+        );
+    }
+
+    if (estado == EstadoReserva.PENDIENTE && vencio(ahora)) {
+        estado = EstadoReserva.VENCIDA;
+        return true;
+    }
+
+    return false;
+}
+
     /** Confirma la reserva antes del plazo. A los 10:00 exactos ya está vencida. */
     public void confirmar(LocalDateTime ahora) {
         if (estado != EstadoReserva.PENDIENTE) {
