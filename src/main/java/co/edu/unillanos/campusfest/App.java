@@ -1,6 +1,9 @@
 package co.edu.unillanos.campusfest;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import co.edu.unillanos.campusfest.application.port.Reloj;
@@ -10,7 +13,7 @@ import co.edu.unillanos.campusfest.application.usecase.EditarEvento;
 import co.edu.unillanos.campusfest.application.usecase.RegistrarIngreso;
 import co.edu.unillanos.campusfest.application.usecase.ReservarEntrada;
 import co.edu.unillanos.campusfest.domain.Evento;
-import co.edu.unillanos.campusfest.infrastructure.persistence.RepositorioEventosEnMemoria;
+import co.edu.unillanos.campusfest.infrastructure.persistence.RepositorioEventosH2;
 import co.edu.unillanos.campusfest.infrastructure.reloj.RelojDelSistema;
 import co.edu.unillanos.campusfest.infrastructure.ui.PantallaCuposController;
 import co.edu.unillanos.campusfest.infrastructure.ui.PantallaEventoController;
@@ -27,15 +30,19 @@ import javafx.stage.Stage;
 /**
  * Ensamblaje de la aplicación (anillo de frameworks y drivers).
  * Es la única clase que crea las implementaciones de los puertos, los casos
- * de uso y los controladores.
+ * de uso y los controladores, y la única que conoce la URL de H2.
  */
 public class App extends Application {
 
+    private static final String URL_BASE_DE_DATOS = "jdbc:h2:./campusfest-db";
     private static final String CARPETA_VISTAS = "vistas/";
 
+    private Connection conexion;
+
     @Override
-    public void start(Stage ventana) throws IOException {
-        RepositorioEventos repositorio = new RepositorioEventosEnMemoria();
+    public void start(Stage ventana) throws IOException, SQLException {
+        conexion = DriverManager.getConnection(URL_BASE_DE_DATOS, "sa", "");
+        RepositorioEventos repositorio = new RepositorioEventosH2(conexion);
         Reloj reloj = new RelojDelSistema();
         cargarEventosDeEjemplo(repositorio);
 
@@ -67,6 +74,13 @@ public class App extends Application {
         ventana.show();
     }
 
+    @Override
+    public void stop() throws SQLException {
+        if (conexion != null) {
+            conexion.close();
+        }
+    }
+
     private Parent cargarVista(String archivo, Object controlador) throws IOException {
         FXMLLoader cargador = new FXMLLoader(App.class.getResource(CARPETA_VISTAS + archivo));
         cargador.setController(controlador);
@@ -79,7 +93,7 @@ public class App extends Application {
         return pestana;
     }
 
-    /** Deja dos eventos de prueba al iniciar. */
+    /** Deja dos eventos de prueba la primera vez que se abre la base de datos. */
     private void cargarEventosDeEjemplo(RepositorioEventos repositorio) {
         if (repositorio.buscar("ev-1") == null) {
             repositorio.guardar(new Evento("ev-1", "Concierto de bienvenida",
@@ -95,4 +109,3 @@ public class App extends Application {
         launch(args);
     }
 }
-
