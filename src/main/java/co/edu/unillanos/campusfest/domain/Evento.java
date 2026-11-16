@@ -89,16 +89,41 @@ public class Evento {
 
     /** CU3. El aforo nunca puede quedar por debajo de bloqueados + cupos ocupados por reservas. */
     public void cambiarAforo(int nuevoAforo, LocalDateTime ahora) {
-        int ocupados = cuposOcupadosPorReservas(ahora);
-        int aforoMinimo = bloqueados + ocupados;
-        if (nuevoAforo < aforoMinimo) {
-            throw new IllegalStateException("Hay " + ocupados + " cupos ocupados por reservas y "
-                    + bloqueados + " bloqueados: el aforo no puede ser menor que "
-                    + aforoMinimo + ".");
-        }
-        this.aforo = nuevoAforo;
-    }
+    validarAforo(nuevoAforo, ahora);
+    this.aforo = nuevoAforo;
+}
+public void editarDatosYAforo(
+        String nombre,
+        LocalDateTime fecha,
+        String lugar,
+        int nuevoAforo,
+        LocalDateTime ahora) {
 
+    // Primero se comprueba todo, sin modificar el evento.
+    validarDatos(nombre, fecha, lugar);
+    validarAforo(nuevoAforo, ahora);
+
+    // Solo se modifica cuando todas las validaciones pasaron.
+    this.nombre = nombre.trim();
+    this.fecha = fecha;
+    this.lugar = lugar.trim();
+    this.aforo = nuevoAforo;
+}
+
+private void validarAforo(int nuevoAforo, LocalDateTime ahora) {
+    int ocupados = cuposOcupadosPorReservas(ahora);
+    int aforoMinimo = bloqueados + ocupados;
+
+    if (nuevoAforo < aforoMinimo) {
+        throw new IllegalStateException(
+                "Hay " + ocupados
+                + " cupos ocupados por reservas y "
+                + bloqueados
+                + " bloqueados: el aforo no puede ser menor que "
+                + aforoMinimo + "."
+        );
+    }
+}
     private int cuposOcupadosPorReservas(LocalDateTime ahora) {
         int ocupados = 0;
         for (Reserva reserva : reservas) {
