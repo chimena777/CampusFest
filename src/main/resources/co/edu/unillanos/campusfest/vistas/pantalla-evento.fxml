@@ -30,7 +30,6 @@
         <Label text="Aforo:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
         <TextField fx:id="campoAforo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
     </GridPane>
-    <Label fx:id="etiquetaBloqueados" styleClass="detalle"/>
     <Button text="Guardar cambios" styleClass="principal" onAction="#alGuardar"/>
     <Label fx:id="etiquetaMensaje" styleClass="mensaje" wrapText="true"/>
 </VBox>

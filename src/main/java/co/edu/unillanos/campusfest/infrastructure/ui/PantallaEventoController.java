@@ -34,9 +34,6 @@ public class PantallaEventoController {
     private TextField campoAforo;
 
     @FXML
-    private Label etiquetaBloqueados;
-
-    @FXML
     private Label etiquetaMensaje;
 
     public PantallaEventoController(EditarEvento editarEvento) {
@@ -51,7 +48,6 @@ public class PantallaEventoController {
             campoFecha.setText(evento.getFecha().format(FORMATO_FECHA));
             campoLugar.setText(evento.getLugar());
             campoAforo.setText(String.valueOf(evento.getAforo()));
-            etiquetaBloqueados.setText("Cupos bloqueados: " + evento.getBloqueados());
             etiquetaMensaje.setText("Evento cargado.");
         } catch (IllegalArgumentException | IllegalStateException e) {
             etiquetaMensaje.setText(e.getMessage());
