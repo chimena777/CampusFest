@@ -197,4 +197,107 @@ class EventoTest {
         }
         return evento;
     }
+
+    @Test
+void noDebeModificarEventoSiNombreEsVacio() {
+
+    Evento evento = nuevoEvento(10, 0);
+
+    String nombreOriginal = evento.getNombre();
+    LocalDateTime fechaOriginal = evento.getFecha();
+    String lugarOriginal = evento.getLugar();
+    int aforoOriginal = evento.getAforo();
+
+    assertThrows(
+            IllegalArgumentException.class,
+            () -> evento.editarDatosYAforo(
+                    "",
+                    fechaOriginal.plusDays(1),
+                    "Nuevo Lugar",
+                    aforoOriginal + 10,
+                    LocalDateTime.now()
+            )
+    );
+
+    assertEquals(nombreOriginal, evento.getNombre());
+    assertEquals(fechaOriginal, evento.getFecha());
+    assertEquals(lugarOriginal, evento.getLugar());
+    assertEquals(aforoOriginal, evento.getAforo());
+}
+
+@Test
+void noDebeModificarEventoSiFechaEsNull() {
+
+    Evento evento = nuevoEvento(10, 0);
+
+    String nombreOriginal = evento.getNombre();
+    LocalDateTime fechaOriginal = evento.getFecha();
+    String lugarOriginal = evento.getLugar();
+
+    assertThrows(
+            IllegalArgumentException.class,
+            () -> evento.editarDatosYAforo(
+                    "Nuevo Nombre",
+                    null,
+                    "Nuevo Lugar",
+                    evento.getAforo(),
+                    LocalDateTime.now()
+            )
+    );
+
+    assertEquals(nombreOriginal, evento.getNombre());
+    assertEquals(fechaOriginal, evento.getFecha());
+    assertEquals(lugarOriginal, evento.getLugar());
+}
+
+@Test
+void noDebeModificarEventoSiLugarEsVacio() {
+
+    Evento evento = nuevoEvento(10, 0);
+
+    String nombreOriginal = evento.getNombre();
+    LocalDateTime fechaOriginal = evento.getFecha();
+    String lugarOriginal = evento.getLugar();
+
+    assertThrows(
+            IllegalArgumentException.class,
+            () -> evento.editarDatosYAforo(
+                    "Nuevo Nombre",
+                    fechaOriginal.plusDays(1),
+                    "",
+                    evento.getAforo(),
+                    LocalDateTime.now()
+            )
+    );
+
+    assertEquals(nombreOriginal, evento.getNombre());
+    assertEquals(fechaOriginal, evento.getFecha());
+    assertEquals(lugarOriginal, evento.getLugar());
+}
+
+@Test
+void noDebeModificarDatosSiAforoEsMenorAlMinimoPermitido() {
+
+    Evento evento = nuevoEvento(10, 5);
+
+    String nombreOriginal = evento.getNombre();
+    LocalDateTime fechaOriginal = evento.getFecha();
+    String lugarOriginal = evento.getLugar();
+
+    assertThrows(
+            IllegalStateException.class,
+            () -> evento.editarDatosYAforo(
+                    "Nuevo Nombre",
+                    fechaOriginal.plusDays(1),
+                    "Nuevo Lugar",
+                    1,
+                    LocalDateTime.now()
+            )
+    );
+
+    assertEquals(nombreOriginal, evento.getNombre());
+    assertEquals(fechaOriginal, evento.getFecha());
+    assertEquals(lugarOriginal, evento.getLugar());
+}
+
 }
