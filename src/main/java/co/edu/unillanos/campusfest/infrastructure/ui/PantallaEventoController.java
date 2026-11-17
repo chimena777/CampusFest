@@ -3,6 +3,7 @@ package co.edu.unillanos.campusfest.infrastructure.ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import co.edu.unillanos.campusfest.application.usecase.EditarEvento;
 import co.edu.unillanos.campusfest.domain.Evento;
@@ -13,9 +14,9 @@ import javafx.scene.control.TextField;
 /** CU3 · Pantalla para que el organizador edite los datos y el aforo de un evento. */
 public class PantallaEventoController {
 
-    private static final DateTimeFormatter FORMATO_FECHA =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
+            private static final DateTimeFormatter FORMATO_FECHA =
+            DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm")
+                    .withResolverStyle(ResolverStyle.STRICT);
     private final EditarEvento editarEvento;
 
     @FXML
