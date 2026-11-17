@@ -80,15 +80,30 @@ public class Evento {
     }
 
     /** CU3. Cambia nombre, fecha y lugar. */
+
     public void cambiarDatos(String nombre, LocalDateTime fecha, String lugar) {
         validarDatos(nombre, fecha, lugar);
         this.nombre = nombre.trim();
         this.fecha = fecha;
         this.lugar = lugar.trim();
     }
+    
+    public void editarDatosYAforo(String nombre, LocalDateTime fecha, 
+        String lugar, int nuevoAforo, LocalDateTime ahora) {
+            validarDatos(nombre, fecha, lugar);
+            validarAforo(nuevoAforo, ahora);
+            this.nombre = nombre.trim();
+            this.fecha = fecha;
+            this.lugar = lugar.trim();
+            this.aforo = nuevoAforo;
+    }
 
     /** CU3. El aforo nunca puede quedar por debajo de bloqueados + cupos ocupados por reservas. */
     public void cambiarAforo(int nuevoAforo, LocalDateTime ahora) {
+    validarAforo(nuevoAforo, ahora);
+    this.aforo = nuevoAforo;
+}
+    private void validarAforo(int nuevoAforo, LocalDateTime ahora) {
         int ocupados = cuposOcupadosPorReservas(ahora);
         int aforoMinimo = bloqueados + ocupados;
         if (nuevoAforo < aforoMinimo) {
@@ -96,7 +111,6 @@ public class Evento {
                     + bloqueados + " bloqueados: el aforo no puede ser menor que "
                     + aforoMinimo + ".");
         }
-        this.aforo = nuevoAforo;
     }
 
     private int cuposOcupadosPorReservas(LocalDateTime ahora) {

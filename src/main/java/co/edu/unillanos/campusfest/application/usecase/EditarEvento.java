@@ -26,19 +26,11 @@ public class EditarEvento {
     }
 
     public void editar(String eventoId, String nombre, LocalDateTime fecha,
-                       String lugar, int nuevoAforo) {
-        Evento evento = BuscadorDeEventos.buscarExistente(repositorio, eventoId);
-        if (nombre == null || nombre.isBlank()) {
-            throw new IllegalArgumentException("-El nombre del evento es obligatorio.");
-        }
-        if (fecha == null) {
-            throw new IllegalArgumentException("-La fecha del evento es obligatoria.");
-        }
-        if (lugar == null || lugar.isBlank()) {
-            throw new IllegalArgumentException("-El lugar del evento es obligatorio.");
-        }
-        evento.cambiarAforo(nuevoAforo, reloj.ahora());
-        evento.cambiarDatos(nombre, fecha, lugar);
+            String lugar, int nuevoAforo) {
+        Evento evento = BuscadorDeEventos.buscarExistente(repositorio,
+        eventoId);
+        evento.editarDatosYAforo(nombre, fecha, lugar, nuevoAforo,
+        reloj.ahora());
         repositorio.guardar(evento);
     }
 }
