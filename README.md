@@ -8,7 +8,7 @@ Aplicación JavaFX para consultar cupos, reservar y confirmar entradas, editar e
 | --- | --- |
 | Yurley Ximena Lozano | Dominio y reglas del negocio: `Evento`, `Reserva`, `EstadoReserva`, `Asistencia` |
 | Looana Marinella Leon Guevara | Casos de uso y puertos: `RepositorioEventos`, `Reloj`, los cuatro casos de uso y `BuscadorDeEventos` |
-| Laura Geraldine Beltran Cediel | Interfaz JavaFX e integración: controladores, FXML, CSS, `App`, `Launcher` y diagramas de diseño (`Docs/Diseno`) |
+| Laura Geraldine Beltran Cediel | Interfaz JavaFX e integración: controladores, FXML, CSS, `App` y `Launcher` |
 | Derlys Xiomara Leal Castillo | Persistencia e infraestructura: `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `RelojDelSistema`, `schema.sql` y `pom.xml` |
 
 ## Cómo ejecutar
@@ -16,11 +16,13 @@ Aplicación JavaFX para consultar cupos, reservar y confirmar entradas, editar e
 Requisitos: Java 21 y Maven 3.9 o superior.
 
 ```
-mvn test          # compila y ejecuta las 90 pruebas
+mvn test          # compila y ejecuta las pruebas (90 de los docentes y las propias del equipo)
 mvn javafx:run    # abre la aplicación
 ```
 
 La base H2 se guarda en el archivo `campusfest-db.mv.db`, en la carpeta desde la que se ejecuta la aplicación, y se crea sola la primera vez con dos eventos de ejemplo: `ev-1` (Concierto de bienvenida, aforo 120, 5 cupos bloqueados) y `ev-2` (Feria de emprendimiento, aforo 50).
+
+Las pruebas de los docentes están sin modificar en `src/test/java`. Las pruebas propias del equipo están en archivos separados, cuyo nombre termina en `EquipoTest`.
 
 Para probar: en la pestaña **CU2 · Reservar entrada** solicite una reserva para `ev-1`, confírmela antes de 10 minutos, copie el código y péguelo en **CU4 · Registrar ingreso**.
 
@@ -46,13 +48,9 @@ Para probar: en la pestaña **CU2 · Reservar entrada** solicite una reserva par
 
 Flujos alternativos cubiertos: sin cupos y reserva vencida (CU2); aforo menor que los cupos ocupados (CU3); código de otro evento, reserva no confirmada e ingreso repetido (CU4).
 
-## Diagramas
-
-Los diagramas de diseño actualizados (clases por anillo, secuencias de CU1 a CU4 y estados de `Reserva` con la regla de 10 minutos) están en `Docs/Diseno`, con una tabla de equivalencias con los diagramas de análisis originales. Los diagramas de análisis originales se conservan en `Docs/` como evidencia del trabajo previo.
-
 ## Declaración de uso de IA
 
-**Herramientas y para qué se usaron.** Se usó Claude (Anthropic) para repartir el trabajo entre los cuatro integrantes, generar el primer borrador de las clases y de las pantallas, y revisar el cumplimiento de las guías. Clases en las que intervino: `Reserva`, `Evento`, `Asistencia`, `EstadoReserva`, los cuatro casos de uso, `BuscadorDeEventos`, `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `schema.sql`, los cuatro controladores, los FXML, el CSS, `App`, `Launcher`, los diagramas de `Docs/Diseno` y este README. Cada integrante revisó, entendió y probó su parte antes de integrarla. Las pruebas entregadas por los docentes no se modificaron.
+**Herramientas y para qué se usaron.** Se usó Claude (Anthropic) para repartir el trabajo entre los cuatro integrantes, generar el primer borrador de las clases y de las pantallas, y revisar el cumplimiento de las guías. Clases en las que intervino: `Reserva`, `Evento`, `Asistencia`, `EstadoReserva`, los cuatro casos de uso, `BuscadorDeEventos`, `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `schema.sql`, los cuatro controladores, los FXML, el CSS, `App`, `Launcher` y este README. Cada integrante revisó, entendió y probó su parte antes de integrarla. Las pruebas entregadas por los docentes no se modificaron.
 
 **Propuestas de la IA que había que corregir.**
 
