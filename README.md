@@ -52,8 +52,3 @@ Flujos alternativos cubiertos: sin cupos y reserva vencida (CU2); aforo menor qu
 
 **Herramientas y para qué se usaron.** Se usó Claude (Anthropic) para repartir el trabajo entre los cuatro integrantes, generar el primer borrador de las clases y de las pantallas, y revisar el cumplimiento de las guías. Clases en las que intervino: `Reserva`, `Evento`, `Asistencia`, `EstadoReserva`, los cuatro casos de uso, `BuscadorDeEventos`, `RepositorioEventosEnMemoria`, `RepositorioEventosH2`, `schema.sql`, los cuatro controladores, los FXML, el CSS, `App`, `Launcher` y este README. Cada integrante revisó, entendió y probó su parte antes de integrarla. Las pruebas entregadas por los docentes no se modificaron.
 
-**Propuestas de la IA que había que corregir.**
-
-1. *Regla del negocio en un controlador.* El primer borrador de `PantallaEventoController` mostraba los cupos bloqueados leyéndolos de la entidad (`evento.getBloqueados()`) y armando el texto en el controlador. La prueba `PantallasTest.losControladoresNoTienenReglasDelNegocio` lo rechazó. Se corrigió quitando esa etiqueta del controlador y del FXML (commit `9992ab1`), de modo que el controlador solo lee los campos, llama a `EditarEvento` y muestra el resultado.
-2. *Edición parcial del evento.* Durante la revisión de `EditarEvento` se identificó el riesgo de modificar parcialmente el evento cuando alguno de los datos o el aforo no fueran válidos. La implementación valida antes de modificar y el repositorio solo guarda cuando todas las operaciones terminan bien.
-3. *Pruebas fuera de su carpeta.* Una versión de la rama del dominio dejó `EventoTest` y `ReservaTest` en `src/main/java`, donde `mvn test` no las compila. Se movieron a `src/test/java` (commit `a94ab89`).
